@@ -1,0 +1,4 @@
+.env
+.vscode
+src/.vscode
+src/vendor/

@@ -12,8 +12,9 @@ type AuthRouter struct {
 
 func NewAuthRouter(controller controllers.AuthController) AuthRouter {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/authenticate", controller.AuthenticatePostHandler).Methods(http.MethodPost)
-	router.HandleFunc("/validate", controller.Validate).Methods(http.MethodPost)
+	authRouter := router.PathPrefix("/auth").Subrouter()
+	authRouter.HandleFunc("/authenticate", controller.AuthenticatePostHandler).Methods(http.MethodPost)
+	authRouter.HandleFunc("/validate", controller.Validate).Methods(http.MethodPost)
 	return AuthRouter{router}
 }
 
